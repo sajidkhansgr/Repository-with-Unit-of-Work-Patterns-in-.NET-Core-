@@ -45,4 +45,7 @@ According to the official MS Docs [(DbContext Class (System.Data.Entity) | Micro
 
 So, you don’t need to use any of these patterns in your code, if you wish. But it is a good approach to create an additional layer of abstraction over them if you don’t want your project to be tightly coupled to Entity Framework Core.
 
+## Project Structure
+
+![image](https://user-images.githubusercontent.com/4632463/216569029-f321cbec-ad8a-433f-a555-f3b450796617.png)
 
