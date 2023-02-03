@@ -7,7 +7,7 @@
 
 # Repository and Unit of Work Patterns in .NET Core
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+_What are the Repository and Unit of Work Patterns?_
 
 <!--
   <<< Author notes: Start of the course >>>
@@ -20,7 +20,10 @@ _Create a site or blog from your GitHub repositories with GitHub Pages._
 
 <!--step0-->
 
-With GitHub Pages, you can host project blogs, documentation, resumes, portfolios, or any other static content you'd like. Your GitHub repository can easily become its own website. In this course, we'll show you how to set up your own site or blog using GitHub Pages.
+According to the official MS Docs [(Designing the infrastructure persistence layer | Microsoft Docs)](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design), repositories are classes or components that encapsulate the logic required to access data sources. They include methods for common operations, providing better decoupling and maintainability.
+The Unit of Work pattern is used to aggregate multiple operations into a single transaction. With this we ensure that either all operations succeed or fail as a single unit.
+Note that you can use the Repository pattern without using the Unit of Work pattern.
+
 
 - **Who is this for**: Beginners, students, project maintainers, small businesses.
 - **What you'll learn**: How to build a GitHub Pages site.
