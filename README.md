@@ -54,25 +54,29 @@ So, you don’t need to use any of these patterns in your code, if you wish. But
 
 For the simplicity of this example, we will use only one entity which will be a representation of a Book.
 
-``` public class Book : BaseEntity
-    {
-        public string Title { get; set; }
-        public int NmPages { get; set; }
-        public string Genre { get; set; }
-    }
+``` 
+public class Book : BaseEntity
+{
+    public string Title { get; set; }
+    public int NmPages { get; set; }
+    public string Genre { get; set; }
+}
+```
 
 Notice the Base class named <b>BaseEntity</b>, from which our entity will inherit. If you decide to add more entities to your example, the same will apply for them.
  
+ ```
  public abstract class BaseEntity
-    {
-        public Guid Id { get; set; }
-    }
+ {
+    public Guid Id { get; set; }
+ }
 
 Last thing to do is see the simple implementation of the <b>LibraryDbContext.cs</b> class, where we define the DbSet for the Book entity:
  
  public class LibraryDbContext : DbContext
-    {
-        public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
-    } ```
+ {
+    public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
+ } 
+    ```
   
   
