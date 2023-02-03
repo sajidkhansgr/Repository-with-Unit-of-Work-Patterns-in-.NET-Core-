@@ -191,3 +191,28 @@ namespace Library.Infrastructure
   
   ```
 
+## Creating the Book Repository
+
+Now, we want to create a repository for the Book entity we defined earlier. We create an interface named <b>IBookRepository.cs</b> with the following code: 
+
+```
+public interface IBookRepository : IGenericRepository<Book>
+    {
+    }
+````    
+And now implement this interface in the <b>BookRepository.cs</b> file:
+
+```
+ public class BookRepository : GenericRepository<Book>, IBookRepository
+    {
+        public BookRepository(LibraryDbContext dbContext) : base(dbContext)
+        {
+        }
+    }
+
+
+```
+
+
+<b><i>Perfect</i><b>. Until now, we’ve finished implementing the repository pattern in our application. Next, 
+  we can move on and see how to use this repository as part of the Unit of Work pattern.
