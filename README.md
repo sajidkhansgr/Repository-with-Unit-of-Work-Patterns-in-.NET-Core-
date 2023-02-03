@@ -214,5 +214,161 @@ And now implement this interface in the <b>BookRepository.cs</b> file:
 ```
 
 
-<b><i>Perfect</i><b>. Until now, we’ve finished implementing the repository pattern in our application. Next, 
+<b><i>Perfect</i></b>. Until now, we’ve finished implementing the repository pattern in our application. Next, 
   we can move on and see how to use this repository as part of the Unit of Work pattern.
+  
+  
+  ## Creating the Unit of Work
+  
+  First, we’ll define an interface <b>IUnitOfWork.cs</b> with the following code:
+  
+  ```
+  public interface IUnitOfWork
+    {
+        IBookRepository BookRepository { get; }
+        void Commit();
+        void Rollback();
+        Task CommitAsync();
+        Task RollbackAsync();
+    }
+  
+  ```
+And we’ll implement it in the <b>UnitOfWork.cs</b> file: 
+
+```
+public class UnitOfWork : IUnitOfWork
+    {
+        private readonly LibraryDbContext _dbContext;
+        private IBookRepository _bookRepository;
+
+
+        public UnitOfWork(LibraryDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+
+        public IBookRepository BookRepository
+        {
+            get { return _bookRepository = _bookRepository ?? new BookRepository(_dbContext); }
+        }
+
+
+        public void Commit()
+            => _dbContext.SaveChanges();
+
+
+        public async Task CommitAsync()
+            => await _dbContext.SaveChangesAsync();
+
+
+        public void Rollback()
+            => _dbContext.Dispose();
+
+
+        public async Task RollbackAsync()
+            => await _dbContext.DisposeAsync();
+    }
+
+
+```
+
+You can see that we have our Book repository as a <b>field</b> in the Unit of Work and also methods for the operations commit and rollback.
+
+For each new repository we create, we will need to add it to the Unit of Work.
+
+Let’s not forget to register our service in <b>Program.cs</b> file: 
+
+```
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+```
+Now the implementation of our Unit of Work pattern is complete.
+
+## Creating the Book Service
+
+Lastly, we create an <b>IBookService.cs</b> interface that has methods for adding a book and getting a list of all the books.
+
+```
+public interface IBookService
+    {
+        public Task<IEnumerable<Book>> GetAll();
+        public Task AddBook(BookDto book);
+    }
+```    
+Let’s add its implementation in the <b>BookService.cs</b> file:
+
+```
+public class BookService : IBookService
+    {
+        public IUnitOfWork _unitOfWork;
+        public BookService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+
+        public async Task AddBook(BookDto bookDto)
+        {
+            var book = new Book
+            {
+                Genre = bookDto.Genre,
+                NmPages = bookDto.NmPages,
+                Title = bookDto.Title,
+            };
+
+
+            _unitOfWork.BookRepository.Add(book);
+            await _unitOfWork.CommitAsync();
+        }
+
+
+        public async Task<IEnumerable<Book>> GetAll()
+            => await _unitOfWork.BookRepository.GetAllAsync();
+    }
+ ```
+Don’t not forget to register our service in <b>Program.cs</b> file:
+
+```
+builder.Services.AddTransient(typeof(IBookService), typeof(BookService));
+```
+
+We use <b>Dependency Injection</b> to inject the unit of work in the book service. Next, in each method of the service, we access the book repository through the unit of work. In the case where we’re adding a new book, we need call <b>CommitAsync()</b> to save all the changes to the database at once.
+
+## Creating the Books Controller
+
+To be able to test this, let’s add a <b>BooksController.cs</b> file and expose a few endpoints.
+
+```
+    [ApiController]
+    [Route("[controller]")]
+    public class BooksController : ControllerBase
+    {
+        public IBookService _bookService { get; set; }
+        public BooksController(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
+
+
+        [HttpGet(Name = "Books")]
+        public async Task<IEnumerable<Book>> GetAll()
+          => await _bookService.GetAll();
+
+
+        [HttpPost]
+        public async Task AddBook([FromBody] BookDto book)
+        {
+            await _bookService.AddBook(book);
+        }
+    }
+ ```   
+Testing the Example
+
+If we make an <b>HTTP GET</b> request to the <b>/Books</b> endpoint, we get the following result:
+
+ ![image](https://user-images.githubusercontent.com/4632463/216611488-236a92d8-d6ed-4446-b793-1af3391e87e2.png)
+
+<b>Perfect. </b> We successfully made use of both the Repository and Unit of Work patterns in our application.
+
+
+
