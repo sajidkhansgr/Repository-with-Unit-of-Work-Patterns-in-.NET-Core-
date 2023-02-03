@@ -1,8 +1,6 @@
-Author : Sajid Ali 
-
-         |Cloud Solution Architect|
-         
-         Published Feb 03, 2023
+Author : Sajid Ali</br>
+|Cloud Solution Architect|</br>
+Published Feb 03, 2023
   
 
 # Repository and Unit of Work Patterns in .NET Core
