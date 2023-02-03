@@ -77,6 +77,8 @@ Last thing to do is see the simple implementation of the <b>LibraryDbContext.cs<
  public class LibraryDbContext : DbContext
  {
     public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
+    
+     public DbSet<Book> Books { get; set; }
  } 
  ```
   
