@@ -1,9 +1,6 @@
-<!--
-  <<< Author notes: Header of the course >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses Creative Commons Attribution 4.0 International.
--->
+Author : Sajid Ali |Cloud Solution Architect|
+         Published Feb 03, 2023
+  
 
 # Repository and Unit of Work Patterns in .NET Core
 
@@ -40,6 +37,7 @@ _Note that you can use the Repository pattern without using the Unit of Work pat
 <!--step0-->
 
 The project uses Entity Framework Core as our O/RM. I suggest you read the official MS Docs [Overview of Entity Framework Core - EF Core | Microsoft Docs](https://learn.microsoft.com/en-us/ef/core/) for more information.
+
 <b><i>One important thing to highlight here:</i></b>
   
 According to the official MS Docs [(DbContext Class (System.Data.Entity) | Microsoft Docs)](https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbcontext?view=entity-framework-6.2.0), the DbContext class is a combination of the Unit of Work and Repository patterns, where the DbContext is an abstraction of the Unit of Work pattern and a DbSet is an abstraction of the Repository pattern.
