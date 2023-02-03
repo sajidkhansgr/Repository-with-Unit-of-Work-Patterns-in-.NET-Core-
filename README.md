@@ -54,10 +54,7 @@ So, you don’t need to use any of these patterns in your code, if you wish. But
 
 For the simplicity of this example, we will use only one entity which will be a representation of a Book.
 
-
-
-
-public class Book : BaseEntity
+``` public class Book : BaseEntity
     {
         public string Title { get; set; }
         public int NmPages { get; set; }
@@ -76,6 +73,6 @@ Last thing to do is see the simple implementation of the <b>LibraryDbContext.cs<
  public class LibraryDbContext : DbContext
     {
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
-    }
+    } ```
   
   
