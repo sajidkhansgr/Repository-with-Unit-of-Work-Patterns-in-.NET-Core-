@@ -27,11 +27,26 @@ _Note that you can use the Repository pattern without using the Unit of Work pat
 
 
 
-- **Who is this for**: Beginners, students, project maintainers, small businesses.
-- **What you'll learn**: How to build a GitHub Pages site.
-- **What you'll build**: We'll build a simple GitHub Pages site with a blog. We'll use [Jekyll](https://jekyllrb.com), a static site generator.
-- **Prerequisites**: If you need to learn about branches, commits, and pull requests, take [Introduction to GitHub](https://github.com/skills/introduction-to-github) first.
-- **How long**: This course is five steps long and takes less than one hour to complete.
+## Implementing the Repository and Unit of Work Patterns
+<!--
+  <<< Author notes: Start of the course >>>
+  Include start button, a note about Actions minutes,
+  and tell the learner why they should take the course.
+  Each step should be wrapped in <details>/<summary>, with an `id` set.
+  The start <details> should have `open` as well.
+  Do not use quotes on the <details> tag attributes.
+-->
+
+<!--step0-->
+
+The project uses Entity Framework Core as our O/RM. I suggest you read the official MS Docs [Overview of Entity Framework Core - EF Core | Microsoft Docs](https://learn.microsoft.com/en-us/ef/core/) for more information.
+<b><i>One important thing to highlight here:</i></b>
+  
+According to the official MS Docs [(DbContext Class (System.Data.Entity) | Microsoft Docs)](https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbcontext?view=entity-framework-6.2.0), the DbContext class is a combination of the Unit of Work and Repository patterns, where the DbContext is an abstraction of the Unit of Work pattern and a DbSet is an abstraction of the Repository pattern.
+
+So, you don’t need to use any of these patterns in your code, if you wish. But it is a good approach to create an additional layer of abstraction over them if you don’t want your project to be tightly coupled to Entity Framework Core.
+
+
 
 ## How to start this course
 
