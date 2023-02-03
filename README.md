@@ -7,7 +7,7 @@
 
 # Repository and Unit of Work Patterns in .NET Core
 
-_What are the Repository and Unit of Work Patterns?_
+# What are the Repository and Unit of Work Patterns?
 
 <!--
   <<< Author notes: Start of the course >>>
