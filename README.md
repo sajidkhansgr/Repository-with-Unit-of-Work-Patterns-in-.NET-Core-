@@ -22,7 +22,9 @@ _What are the Repository and Unit of Work Patterns?_
 
 According to the official MS Docs [(Designing the infrastructure persistence layer | Microsoft Docs)](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design), repositories are classes or components that encapsulate the logic required to access data sources. They include methods for common operations, providing better decoupling and maintainability.
 The Unit of Work pattern is used to aggregate multiple operations into a single transaction. With this we ensure that either all operations succeed or fail as a single unit.
-Note that you can use the Repository pattern without using the Unit of Work pattern.
+
+_Note that you can use the Repository pattern without using the Unit of Work pattern. :tada:!_
+
 
 
 - **Who is this for**: Beginners, students, project maintainers, small businesses.
