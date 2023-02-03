@@ -65,18 +65,19 @@ public class Book : BaseEntity
 
 Notice the Base class named <b>BaseEntity</b>, from which our entity will inherit. If you decide to add more entities to your example, the same will apply for them.
  
- ```
+```
  public abstract class BaseEntity
  {
     public Guid Id { get; set; }
  }
-
+```
 Last thing to do is see the simple implementation of the <b>LibraryDbContext.cs</b> class, where we define the DbSet for the Book entity:
  
+ ```
  public class LibraryDbContext : DbContext
  {
     public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
  } 
-    ```
+ ```
   
   
